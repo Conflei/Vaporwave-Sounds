@@ -1,5 +1,5 @@
 FlexboxLayout {
-    justify-content: center;
+  justify-content: center;
   align-items: center;
   background-size: cover;
   background-image: url("~/images/bg.jpg");
@@ -7,7 +7,28 @@ FlexboxLayout {
   StackLayout {
     width: 320;
     padding: 10 16;
+    margin-top: 130;
     background-color: #f0f0f0;
     background-size: cover;
+    opacity: 0.9;
+  }
+  Image {
+    margin-bottom: 20;
+    height: 70;
+  }
+  Button, TextField {
+    margin-bottom: 10;
+  }
+  .btn-primary {
+    background-color: rgb(0, 162, 203);
+    margin-left: 0;
+    margin-right: 0;
+  }
+  TextField {
+    placeholder-color: #C4AFB4;
+    color: black;
+  }
+  .signUpText{
+      color: rgb(82, 80, 80);
   }
   
