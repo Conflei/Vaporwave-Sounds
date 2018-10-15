@@ -31,4 +31,10 @@ FlexboxLayout {
   .signUpText{
       color: rgb(82, 80, 80);
   }
+  .dark {
+    background-color: #301217;
+  }
+  .dark TextField {
+    color:  #C4AFB4;
+  }
   

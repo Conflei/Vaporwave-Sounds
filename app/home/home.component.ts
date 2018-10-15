@@ -2,6 +2,7 @@ import { Component, OnInit } from "@angular/core";
 import { User } from "~/shared/user/user.model";
 import { UserService } from "~/shared/user/user.service";
 import { Router } from "@angular/router"
+import { Page } from "tns-core-modules/ui/page";
 
 @Component({
     selector: "Home",
@@ -16,13 +17,14 @@ export class HomeComponent implements OnInit {
     email = "felix@a.bcad";
     isLoggingIn = true;
 
-    constructor(private router: Router, private userService: UserService) {
+    constructor(private page: Page, private router: Router, private userService: UserService) {
         this.user = new User();
         this.user.email = "as@a.a";
         this.user.password = "12"
     }
 
     ngOnInit(): void {
+        this.page.actionBarHidden = true;
     }
 
     submit() {
