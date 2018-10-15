@@ -1,0 +1,13 @@
+FlexboxLayout {
+    justify-content: center;
+  align-items: center;
+  background-size: cover;
+  background-image: url("~/images/bg.jpg");
+  }
+  StackLayout {
+    width: 320;
+    padding: 10 16;
+    background-color: #f0f0f0;
+    background-size: cover;
+  }
+  
