@@ -1,8 +1,79 @@
-import { Component } from "@angular/core";
+import { Component, ElementRef, OnInit, ViewChild } from "@angular/core";
+import { Artist } from "../shared/artist/artist.model"
+import { ArtistService } from "../shared/artist/artist.service" 
+import { TextField } from "tns-core-modules/ui/text-field";
+import { ListViewEventData, RadListView } from "nativescript-ui-listview";
+import { View } from "tns-core-modules/ui/core/view";
 
 @Component({
-  selector: "gr-list",
-  templateUrl: "list/list.component.html",
-  styleUrls: ["list/list.component.css"]
+    selector: "gr-list",
+    templateUrl: "list/list.component.html",
+    styleUrls: ["list/list.component.css"],
+    providers: [ArtistService]
 })
-export class ListComponent {}
+export class ListComponent implements OnInit {
+    artists: Array<Artist> = [];
+    artist = "";
+    isLoading = false;
+    listLoaded = false;
+
+    @ViewChild("artistTextField") artistTextField: ElementRef;
+
+    constructor(private artistService: ArtistService){}
+
+    ngOnInit() {
+      this.isLoading = true;
+      this.artistService.load()
+      .subscribe(loadedArtists => {
+        loadedArtists.forEach((artistObject) => {
+          this.artists.unshift(artistObject);
+        });
+        this.isLoading = false;
+        this.listLoaded = true;
+      });
+    }
+
+    add() {
+      if (this.artist.trim() === "") {
+        alert("Enter a artist item");
+        return;
+      }
+    
+      // Dismiss the keyboard
+      let textField = <TextField>this.artistTextField.nativeElement;
+      textField.dismissSoftInput();
+    
+      this.artistService.add(this.artist)
+        .subscribe(
+          artistObject => {
+            this.artists.unshift(artistObject);
+            this.artist = "";
+          },
+          () => {
+            alert({
+              message: "An error occurred while adding an item to your list.",
+              okButtonText: "OK"
+            });
+            this.artist = "";
+          }
+        )
+    }
+
+    onSwipeCellStarted(args: ListViewEventData) {
+      var swipeLimits = args.data.swipeLimits;
+      var swipeView = args.object;
+      var rightItem = swipeView.getViewById<View>("delete-view");
+      swipeLimits.right = rightItem.getMeasuredWidth();
+      swipeLimits.left = 0;
+      swipeLimits.threshold = rightItem.getMeasuredWidth() / 2;
+    }
+    
+    delete(args: ListViewEventData) {
+      let artist = <Artist>args.object.bindingContext;
+      this.artistService.delete(artist.id)
+        .subscribe(() => {
+          let index = this.artists.indexOf(artist);
+          this.artists.splice(index, 1);
+        });
+    }
+}

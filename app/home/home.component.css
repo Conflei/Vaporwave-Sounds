@@ -10,7 +10,7 @@ FlexboxLayout {
     margin-top: 130;
     background-color: #f0f0f0;
     background-size: cover;
-    opacity: 0.85;
+    opacity: 0.875;
   }
   Image {
     margin-bottom: 20;

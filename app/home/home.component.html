@@ -4,7 +4,7 @@
 	
 		<StackLayout class="form" [class.dark]="!isLoggingIn">
 		<Image src="~/images/win98.png"></Image>
-    <TextField hint="Email Address" keyboardType="email" [(ngModel)]="user.email" autocorrect="false" autocapitalizationType="none" class="input input-border"></TextField>
+    <TextField hint="Email Addresss" keyboardType="email" [(ngModel)]="user.email" autocorrect="false" autocapitalizationType="none" class="input input-border"></TextField>
     <TextField hint="Password" secure="true" class="input input-border" [(ngModel)]="user.password"></TextField>
 
     <Button [text]="isLoggingIn ? 'Sign in' : 'Sign up'" class="btn btn-primary" (tap)="submit()"></Button>

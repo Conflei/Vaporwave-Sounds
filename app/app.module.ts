@@ -8,6 +8,8 @@ import { NativeScriptFormsModule } from "nativescript-angular/forms";
 
 import { NativeScriptHttpModule } from "nativescript-angular/http";
 
+import { NativeScriptUIListViewModule } from "nativescript-ui-listview/angular";
+
 @NgModule({
     bootstrap: [
         AppComponent
@@ -16,7 +18,8 @@ import { NativeScriptHttpModule } from "nativescript-angular/http";
         NativeScriptModule,
         NativeScriptFormsModule,
         AppRoutingModule,
-        NativeScriptHttpModule
+        NativeScriptHttpModule,
+        NativeScriptUIListViewModule
     ],
     declarations: [
         AppComponent
