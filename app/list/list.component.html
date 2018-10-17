@@ -1,27 +1,34 @@
-<ActionBar title="List of Vaporwave Artists"></ActionBar>
+<ActionBar title="Series I've Watched"></ActionBar>
 
 
 <GridLayout rows="auto, *">
 
-    <GridLayout row="0" columns="*, auto" class="add-bar">
-      <TextField #artistTextField hint="Enter a Vaporwave Artist" col="0" [(ngModel)]="artist"></TextField>
-      <Image src="~/images/add.png" col="1" (tap)="add()"></Image>
+    <GridLayout row="0" columns="*, auto" class="add-bar" (tap)="add()">
+      <!--<TextField #artistTextField hint="Enter a Vaporwave Artist" col="0" [(ngModel)]='artist.name'></TextField>-->
+      <Label text="Create a new entry" col="0" style="font-size:25; color: darkgray "></Label>
+      <Image src="~/images/add.png" col="1"></Image>
     </GridLayout>
   
     <RadListView row="1" [items]="artists" [class.visible] = "listLoaded"
     swipeActions="true" (itemSwipeProgressStarted)="onSwipeCellStarted($event)">
 
-    <ng-template let-item="item">
-      <Label [text]="item.name" class="p-15"></Label>
-     </ng-template>
+          <ng-template let-item="item">
+            <StackLayout class= "fullItem">
+            <Label [id]="item._id" [text]="item.name" class="p-15" (tap)="itemTapped($event)"></Label>
+            <Label [text] = "item.finished" class="p-15"></Label>
+            <Label [text] = "item.lastc" class="p-15"></Label>
+            <Label [text] = "item.rank" class="p-15"></Label>
+            </StackLayout>
+          </ng-template>
 
-<GridLayout *tkListItemSwipeTemplate columns="*, auto">
-      <StackLayout id="delete-view" col="1" (tap)="delete($event)" class="delete-view">
-      <Image src="~/images/delete.png"></Image>
-    </StackLayout>
-  </GridLayout>
+          <GridLayout *tkListItemSwipeTemplate columns="*, auto">
+                <StackLayout id="delete-view" col="1" (tap)="delete($event)" class="delete-view">
+                <Image src="~/images/delete.png"></Image>
+              </StackLayout>
+            </GridLayout>
 
-</RadListView>
+    </RadListView>
+
 <ActivityIndicator [busy]="isLoading" [visibility]="isLoading ? 'visible' : 'collapse'" row="1" horizontalAlignment="center" verticalAlignment="center"></ActivityIndicator>
   </GridLayout>
   

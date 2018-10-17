@@ -1,5 +1,5 @@
 .add-bar {
-    background-color: #01cdfe;
+    background-color: #f5f5f5;
     padding: 5;
   }
   .add-bar Image {
@@ -11,7 +11,7 @@
   .add-bar TextField {
     padding: 10;
   }
-  Label {
+  Label .item {
     background-color: white;
     border-bottom-width: 1;
     border-bottom-color: gray;

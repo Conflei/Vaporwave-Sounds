@@ -8,7 +8,7 @@ import { Artist } from "./artist.model";
 
 @Injectable()
 export class ArtistService {
-    baseUrl = Config.apiUrl + "appdata/" + Config.appKey + "/Groceries";
+    baseUrl = Config.apiUrl + "appdata/" + Config.appKey + "/anime";
 
     constructor(private http: Http) { }
 
@@ -25,7 +25,7 @@ export class ArtistService {
             map(data => {
                 let artistList = [];
                 data.forEach((artist) => {
-                    artistList.push(new Artist(artist._id, artist.Name));
+                    artistList.push(new Artist(artist._id, artist.Name, artist.finished, artist.lastc, artist.rank));
                 });
                 return artistList;
             }),
@@ -33,7 +33,7 @@ export class ArtistService {
         );
     }
 
-    add(name: string) {
+    add(name: string, finished: string, lastc: string, rank: string) {
         return this.http.post(
             this.baseUrl,
             JSON.stringify({ Name: name }),
@@ -41,7 +41,7 @@ export class ArtistService {
         ).pipe(
             map(res => res.json()),
             map(data => {
-                return new Artist(data._id, name);
+                return new Artist(data._id, data.name, data.finished, data.lastc, data.rank);
             }),
             catchError(this.handleErrors)
         );

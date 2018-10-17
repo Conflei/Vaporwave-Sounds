@@ -19,8 +19,8 @@ export class HomeComponent implements OnInit {
 
     constructor(private page: Page, private router: Router, private userService: UserService) {
         this.user = new User();
-        this.user.email = "as@a.a";
-        this.user.password = "12"
+        this.user.email = "c@c.c";
+        this.user.password = "c"
     }
 
     ngOnInit(): void {

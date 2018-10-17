@@ -13,7 +13,7 @@ import { View } from "tns-core-modules/ui/core/view";
 })
 export class ListComponent implements OnInit {
     artists: Array<Artist> = [];
-    artist = "";
+    artist: Artist = new Artist("", "", "", "", "");
     isLoading = false;
     listLoaded = false;
 
@@ -34,7 +34,7 @@ export class ListComponent implements OnInit {
     }
 
     add() {
-      if (this.artist.trim() === "") {
+      if (this.artist.name.trim() === "") {
         alert("Enter a artist item");
         return;
       }
@@ -43,20 +43,32 @@ export class ListComponent implements OnInit {
       let textField = <TextField>this.artistTextField.nativeElement;
       textField.dismissSoftInput();
     
-      this.artistService.add(this.artist)
+      this.artistService.add(this.artist.name, this.artist.finished, this.artist.lastc, this.artist.rank)
         .subscribe(
           artistObject => {
             this.artists.unshift(artistObject);
-            this.artist = "";
+            this.artist.name = "";
+            this.artist.finished = "";
+            this.artist.lastc = "";
+            this.artist.rank = "";
           },
           () => {
             alert({
               message: "An error occurred while adding an item to your list.",
               okButtonText: "OK"
             });
-            this.artist = "";
+            this.artist.name = "";
+            this.artist.finished = "";
+            this.artist.lastc = "";
+            this.artist.rank = "";
           }
         )
+    }
+
+    itemTapped(args: ListViewEventData) {
+      let artist = <Artist>args.object.bindingContext;
+      let index = this.artists.indexOf(artist);
+      console.log("Item Tapped "+index);
     }
 
     onSwipeCellStarted(args: ListViewEventData) {
