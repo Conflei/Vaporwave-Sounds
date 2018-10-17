@@ -4,6 +4,8 @@ import { ArtistService } from "../shared/artist/artist.service"
 import { TextField } from "tns-core-modules/ui/text-field";
 import { ListViewEventData, RadListView } from "nativescript-ui-listview";
 import { View } from "tns-core-modules/ui/core/view";
+import { Router } from "@angular/router"
+import { Config } from "~/shared/config";
 
 @Component({
     selector: "gr-list",
@@ -19,7 +21,7 @@ export class ListComponent implements OnInit {
 
     @ViewChild("artistTextField") artistTextField: ElementRef;
 
-    constructor(private artistService: ArtistService){}
+    constructor(private artistService: ArtistService, private router:Router){}
 
     ngOnInit() {
       this.isLoading = true;
@@ -33,8 +35,19 @@ export class ListComponent implements OnInit {
       });
     }
 
+    createEntry()
+    {
+      this.router.navigate(["/detail"]);
+    }
+
     add() {
-      if (this.artist.name.trim() === "") {
+      console.log("Go TO DETAIL");
+      Config.newElementName = "";
+      Config.newElementFinished = "";
+      Config.newElementLastC = "";
+      Config.newElementRank = "";
+      this.router.navigate(["/detail"]);
+      /*if (this.artist.name.trim() === "") {
         alert("Enter a artist item");
         return;
       }
@@ -62,12 +75,17 @@ export class ListComponent implements OnInit {
             this.artist.lastc = "";
             this.artist.rank = "";
           }
-        )
+        )*/
     }
 
     itemTapped(args: ListViewEventData) {
       let artist = <Artist>args.object.bindingContext;
+      Config.newElementName = artist.name;
+      Config.newElementFinished = artist.finished;
+      Config.newElementLastC = artist.lastc;
+      Config.newElementRank = artist.rank;
       let index = this.artists.indexOf(artist);
+      this.router.navigate(["/detail"]);
       console.log("Item Tapped "+index);
     }
 

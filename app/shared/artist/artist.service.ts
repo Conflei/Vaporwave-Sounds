@@ -25,7 +25,7 @@ export class ArtistService {
             map(data => {
                 let artistList = [];
                 data.forEach((artist) => {
-                    artistList.push(new Artist(artist._id, artist.Name, artist.finished, artist.lastc, artist.rank));
+                    artistList.push(new Artist(artist._id, artist.Name, artist.finished, artist.lastc , artist.rank));
                 });
                 return artistList;
             }),
@@ -36,7 +36,7 @@ export class ArtistService {
     add(name: string, finished: string, lastc: string, rank: string) {
         return this.http.post(
             this.baseUrl,
-            JSON.stringify({ Name: name }),
+            JSON.stringify({ Name: name, finished: finished, lastc: lastc, rank:rank }),
             { headers: this.getCommonHeaders() }
         ).pipe(
             map(res => res.json()),

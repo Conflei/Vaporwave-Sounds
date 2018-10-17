@@ -5,4 +5,8 @@ export class Config {
     static authHeader = "Basic a2lkX3IxVE80V1ZvNzozNmM2ODE3ZjlkMTI0NWJmOGUxNmQ2NzVkNDE3NGNkOA==";
     static apiVer = "3";
     static token = "";
+    static newElementName = "";
+    static newElementFinished = "";
+    static newElementRank = "";
+    static newElementLastC = "";
   }

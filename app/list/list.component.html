@@ -3,10 +3,10 @@
 
 <GridLayout rows="auto, *">
 
-    <GridLayout row="0" columns="*, auto" class="add-bar" (tap)="add()">
+    <GridLayout row="0" columns="*, auto" class="add-bar">
       <!--<TextField #artistTextField hint="Enter a Vaporwave Artist" col="0" [(ngModel)]='artist.name'></TextField>-->
       <Label text="Create a new entry" col="0" style="font-size:25; color: darkgray "></Label>
-      <Image src="~/images/add.png" col="1"></Image>
+      <Image src="~/images/add.png" col="1" (tap)="add()"></Image>
     </GridLayout>
   
     <RadListView row="1" [items]="artists" [class.visible] = "listLoaded"
@@ -15,9 +15,6 @@
           <ng-template let-item="item">
             <StackLayout class= "fullItem">
             <Label [id]="item._id" [text]="item.name" class="p-15" (tap)="itemTapped($event)"></Label>
-            <Label [text] = "item.finished" class="p-15"></Label>
-            <Label [text] = "item.lastc" class="p-15"></Label>
-            <Label [text] = "item.rank" class="p-15"></Label>
             </StackLayout>
           </ng-template>
 
