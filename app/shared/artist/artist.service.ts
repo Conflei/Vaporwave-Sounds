@@ -47,6 +47,20 @@ export class ArtistService {
         );
     }
 
+    update(id: string, name: string, finished: string, lastc: string, rank: string) {
+        return this.http.put(
+            this.baseUrl+"/"+id,
+            JSON.stringify({ Name: name, finished: finished, lastc: lastc, rank:rank }),
+            { headers: this.getCommonHeaders() }
+        ).pipe(
+            map(res => res.json()),
+            map(data => {
+                return new Artist(data._id, data.name, data.finished, data.lastc, data.rank);
+            }),
+            catchError(this.handleErrors)
+        );
+    }
+
     delete(id: string) {
         return this.http.delete(
             this.baseUrl + "/" + id,

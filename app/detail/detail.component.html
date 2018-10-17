@@ -1,11 +1,14 @@
 
 <FlexboxLayout>
     <StackLayout class="form">
-            <Label text="Create a new show" style="font-size:30;"></Label>
+            <Label text="{{ isDetail ? 'Detail' : 'Create Show' }}" style="font-size:30;"></Label>
             <TextField #artistTextField hint="Show name" col="0" [(ngModel)]='artist.name'></TextField>
             <TextField #artistTextField hint="Last Chapter Seen" col="0" [(ngModel)]='artist.lastc'></TextField>
             <TextField #artistTextField hint="Finished? " col="0" [(ngModel)]='artist.finished'></TextField>
             <TextField #artistTextField hint="Your rank " col="0" [(ngModel)]='artist.rank'></TextField>
-            <Button text="SAVE" class="btn btn-primary" (tap)="submit()"></Button>
+            <Button text="{{ isDetail ? 'Update Show' : 'Save Show' }}" 
+            class="btn btn-primary" (tap)="submit()" ></Button>
+            <!--<Button visibility="{{ isDetail ? 'visible' : 'collapsed' }}" 
+                text="UPDATE" class="btn btn-primary" (tap)="update()" ></Button>-->
     </StackLayout>
 </FlexboxLayout>

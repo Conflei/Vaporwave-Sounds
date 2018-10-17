@@ -6,6 +6,7 @@ import { ListViewEventData, RadListView } from "nativescript-ui-listview";
 import { View } from "tns-core-modules/ui/core/view";
 import { Router } from "@angular/router"
 import { Config } from "~/shared/config";
+import { Page } from "tns-core-modules/ui/page";
 
 @Component({
     selector: "gr-list",
@@ -21,7 +22,11 @@ export class ListComponent implements OnInit {
 
     @ViewChild("artistTextField") artistTextField: ElementRef;
 
-    constructor(private artistService: ArtistService, private router:Router){}
+    constructor(private artistService: ArtistService, private router:Router, private page:Page){
+      this.page.on(Page.navigatingToEvent, function(){
+        console.log("Im on page again");
+       })
+    }
 
     ngOnInit() {
       this.isLoading = true;
@@ -41,45 +46,16 @@ export class ListComponent implements OnInit {
     }
 
     add() {
-      console.log("Go TO DETAIL");
       Config.newElementName = "";
       Config.newElementFinished = "";
       Config.newElementLastC = "";
       Config.newElementRank = "";
       this.router.navigate(["/detail"]);
-      /*if (this.artist.name.trim() === "") {
-        alert("Enter a artist item");
-        return;
-      }
-    
-      // Dismiss the keyboard
-      let textField = <TextField>this.artistTextField.nativeElement;
-      textField.dismissSoftInput();
-    
-      this.artistService.add(this.artist.name, this.artist.finished, this.artist.lastc, this.artist.rank)
-        .subscribe(
-          artistObject => {
-            this.artists.unshift(artistObject);
-            this.artist.name = "";
-            this.artist.finished = "";
-            this.artist.lastc = "";
-            this.artist.rank = "";
-          },
-          () => {
-            alert({
-              message: "An error occurred while adding an item to your list.",
-              okButtonText: "OK"
-            });
-            this.artist.name = "";
-            this.artist.finished = "";
-            this.artist.lastc = "";
-            this.artist.rank = "";
-          }
-        )*/
     }
 
     itemTapped(args: ListViewEventData) {
       let artist = <Artist>args.object.bindingContext;
+      Config.newElementId = artist.id
       Config.newElementName = artist.name;
       Config.newElementFinished = artist.finished;
       Config.newElementLastC = artist.lastc;

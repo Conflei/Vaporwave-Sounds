@@ -14,7 +14,6 @@ import { Page } from "tns-core-modules/ui/page";
 export class HomeComponent implements OnInit {
 
     user: User;
-    email = "felix@a.bcad";
     isLoggingIn = true;
 
     constructor(private page: Page, private router: Router, private userService: UserService) {

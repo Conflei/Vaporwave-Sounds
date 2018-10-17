@@ -9,4 +9,5 @@ export class Config {
     static newElementFinished = "";
     static newElementRank = "";
     static newElementLastC = "";
+    static newElementId = "";
   }

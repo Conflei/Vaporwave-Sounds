@@ -2,7 +2,7 @@ FlexboxLayout {
   justify-content: center;
   align-items: center;
   background-size: cover;
-  background-image: url("~/images/bg.jpg");
+  background-image: url("~/images/netflixbg.png");
   }
   StackLayout {
     width: 320;
